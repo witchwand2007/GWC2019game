@@ -5,19 +5,30 @@
 import pygame
 from pygame.locals import *
 
+# Set up 2D array (list of lists) for board
+gridrow=int(input("hey give me a row")) #limit to 8
+while gridrow>8:
+    gridrow=int(input("hey give me a row that is 8 or less")) #limit to 8
+gridcolumn=int (input("list a column size")) #limit to 14
+while gridcolumn>14:
+    gridcolumn=int (input("list a column size that is 14 or less"))
+grid = []
+for row in range(gridrow):
+    grid.append([])
+    for column in range(gridcolumn):
+        grid[row].append(0) # all values set to 0
+
+
 # 2 - Set game global variables
-boardsize = (512, 512)
-screen = pygame.display.set_mode(boardsize)
 width, height, margin = 100, 100, 2
+boardsizew=width*gridcolumn+12
+boardsizeh=height*gridrow+12
+boardsize = (boardsizew, boardsizeh) # TODO
+screen = pygame.display.set_mode(boardsize)
 BLACK = (0, 0, 0)
 WHITE = (255,255,255)
 
-# Set up 2D array (list of lists) for board
-grid = []
-for row in range(5):
-    grid.append([])
-    for column in range(5):
-        grid[row].append(0) # all values set to 0
+
 
 # Set hard-coded start locations for player and icons:
 player = pygame.image.load('player.jpg').convert()
@@ -57,7 +68,7 @@ while (score < 4):
             print("You have learned "+str(score)+" of the Core 4") 
           grid[playerCoord[0]][playerCoord[1]] = 1          
       elif event.key == pygame.K_RIGHT or event.key == ord('d'):
-        if playerCoord[1] < 4:
+        if playerCoord[1] < gridcolumn-1:
           grid[playerCoord[0]][playerCoord[1]] = 0
           playerCoord[1] += 1
           if grid[playerCoord[0]][playerCoord[1]] >= 10:
@@ -73,7 +84,7 @@ while (score < 4):
             print("You have learned "+str(score)+" of the Core 4")           
           grid[playerCoord[0]][playerCoord[1]] = 1          
       elif event.key == pygame.K_DOWN or event.key == ord('s'):
-        if playerCoord[0] < 4:
+        if playerCoord[0] < gridrow-1:
           grid[playerCoord[0]][playerCoord[1]] = 0
           playerCoord[0] += 1
           if grid[playerCoord[0]][playerCoord[1]] >= 10:
@@ -85,8 +96,8 @@ while (score < 4):
         break
              
   # Update the grid for the board
-  for row in range(5):
-      for column in range(5):
+  for row in range(gridrow):
+      for column in range(gridcolumn):
           color = WHITE             
           pygame.draw.rect(screen,color,[(margin + width) * column + margin,
                                          (margin + height) * row + margin,
