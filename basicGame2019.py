@@ -4,6 +4,7 @@
 # 1 - Import pygame library
 import pygame
 from pygame.locals import *
+import random
 
 # Set up 2D array (list of lists) for board
 gridrow=int(input("hey give me a row")) #limit to 8
@@ -35,13 +36,25 @@ player = pygame.image.load('player.jpg').convert()
 playerCoord = [0,0]
 grid[0][0] = 1 # player icon; value of 1 is player location
 icon0 = pygame.image.load('icon0.jpg').convert()
-grid[0][2] = 10 # icon 0 location set by a value of 10
+x = random.randint(0,gridcolumn-1)
+y = random.randint(0,gridrow-1)
+print(x,y)
+grid[y][x] = 10 # icon 0 location set by a value of 10
 icon1 = pygame.image.load('icon1.jpg').convert()
-grid[3][1] = 11 # icon 1 location set by a value of 11
+x = random.randint(0,gridcolumn-1)
+y = random.randint(0,gridrow-1)
+print(x,y)
+grid[y][x] = 11 # icon 1 location set by a value of 11
 icon2 = pygame.image.load('icon2.jpg').convert()
-grid[2][2] = 12 # icon 2 location set by a value of 12
+x = random.randint(0,gridcolumn-1)
+y = random.randint(0,gridrow-1)
+print(x,y)
+grid[y][x] = 12 # icon 2 location set by a value of 12
 icon3 = pygame.image.load('icon3.jpg').convert()
-grid[4][3] = 13 # icon 3 location set by a value of 13
+x = random.randint(0,gridcolumn-1)
+y = random.randint(0,gridrow-1)
+print(x,y)
+grid[y][x] = 13 # icon 3 location set by a value of 13
 
 pygame.init()
 clock = pygame.time.Clock()
